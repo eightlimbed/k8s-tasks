@@ -1,1 +1,1 @@
-Walking through some of the Kubernetes [https://kubernetes.io/docs/tasks/](tasks).
+Walking through some of the Kubernetes [tasks](https://kubernetes.io/docs/tasks/).
