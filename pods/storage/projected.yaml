@@ -1,0 +1,31 @@
+# Configure a Projected Volume for a Pod
+# Create username and password Secrets from a local file
+# Use a Projected Volume to mount the Secrets in a shared directory
+
+apiVersion: v1
+kind: Pod
+metadata:
+    name: test-projected-volume
+spec:
+    containers:
+    - name: test-projected-volume-container
+      image: busybox
+      args: [sleep, "86400"]
+      volumeMounts:
+      - name: projected-volume
+        mountPath: "/projected-volume"
+        readOnly: true
+    volumes:
+    - name: projected-volume
+      projected:
+          sources:
+          - secret:
+              name: user
+          - secret:
+              name: pass
+
+# The secrets were created via:
+# `echo -n "admin" > ./username.txt`
+# `echo -n "password" > ./password.txt`
+# `kubectl create secret generic user --from-file=./username.txt`
+# `kubectl create secret generic pass --from-file=./password.txt`
