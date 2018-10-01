@@ -1,0 +1,22 @@
+# Create a Pod that uses the PVC as a Volume
+
+apiVersion: v1
+kind: Pod
+metadata:
+    name: pvc-pod
+spec:
+    containers:
+    - name: pvc-container
+      image: nginx
+      ports:
+          - containerPort: 80
+            name: "http-server"
+      volumeMounts:
+          - mountPath: "/usr/share/nginx/html"
+            # This puts /mnt/data/index.html at /usr/share/nginx/html
+            name: pvc-storage
+    volumes:
+    # From the Pod's point of view, the PVClaim IS the Volume
+    - name: pvc-storage
+      persistentVolumeClaim:
+          claimName: pvc-example

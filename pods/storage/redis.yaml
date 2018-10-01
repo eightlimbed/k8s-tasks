@@ -1,0 +1,17 @@
+# Create a Pod that runs a Redis Container with an EmptyDir Volume
+# The Volume will last the life of the Pod even if the container dies
+
+apiVersion: v1
+kind: Pod
+metadata:
+    name: redis-emptydir-pod
+spec:
+    containers:
+    - name: redis-emptydir-container
+      image: redis
+      volumeMounts:
+      - name: redis-emptydir-volume
+        mountPath: /data/storage
+    volumes:
+    - name: redis-emptydir-volume
+      emptyDir: {}

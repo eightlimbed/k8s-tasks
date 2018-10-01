@@ -1,0 +1,13 @@
+# Create a PersistentVolumeClaim for a hostPath Volume on a Node(s) at /mnt/data
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: pvc-example
+spec:
+    storageClassName: manual # Must match the name defined in the PV
+    accessModes:
+        - ReadWriteOnce
+    resources:
+        requests:
+            storage: 3Gi # Request 3Gi of the total Volume

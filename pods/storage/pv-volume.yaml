@@ -1,0 +1,16 @@
+# Create a hostPath Persistent Volume
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+    name: pv-example
+    labels:
+        type: local
+spec:
+    storageClassName: manual # This will be used to Bind PVCs
+    capacity:
+        storage: 10Gi # The size of the Volume is 10Gi
+    accessModes:
+        - ReadWriteOnce # The Volume can be mounted as RW by 1 Node at a time
+    hostPath:
+        path: "/mnt/data" # The Volume is at /mnt/data on the Node(s)

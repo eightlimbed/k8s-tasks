@@ -1,0 +1,17 @@
+# Create a Pod that gets assigned a QoS class of 'Burstable'
+# For a Pod to have QoS=Bustable:
+# At least one Container in the Pod has a memory or cpu request
+
+apiVersion: v1
+kind: Pod
+metadata:
+    name: qos-example-pod
+    namespace: qos-example
+spec:
+    containers:
+    - name: qos-example-containers
+      image: nginx
+      resources:
+          requests:
+              memory: "200Mi"
+          # a single memory request will make the QoS Burstable

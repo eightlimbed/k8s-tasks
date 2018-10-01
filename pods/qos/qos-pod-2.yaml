@@ -1,0 +1,14 @@
+# Create a Pod that gets assigned a QoS class of 'BestEffort'
+# For a Pod to have QoS=BestEffort:
+# Containers in the Pod must not have any memory or cpu limits or requests
+
+apiVersion: v1
+kind: Pod
+metadata:
+    name: qos-example-pod
+    namespace: qos-example
+spec:
+    containers:
+    - name: qos-example-containers
+      image: nginx
+      # no memory or cpu requests or limits will make the QoS BestEffort

@@ -1,0 +1,22 @@
+# Create a Pod that gets assigned a QoS class of 'Guarenteed'
+# For a Pod to have QoS=Guarenteed:
+# Every container must have a memory limit and request of equal value
+# Every container must have a CPU limit and request of equal value
+
+apiVersion: v1
+kind: Pod
+metadata:
+    name: qos-example-pod
+    namespace: qos-example
+spec:
+    containers:
+    - name: qos-example-containers
+      image: nginx
+      resources:
+          limits:
+              memory: "200Mi"
+              cpu: "0.7"
+          requests:
+              memory: "200Mi"
+              cpu: "0.7"
+          # memory and cpu limits and requests are equal, so QoS == 'Guarenteed'
